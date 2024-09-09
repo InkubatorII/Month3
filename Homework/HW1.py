@@ -14,14 +14,12 @@ admin = [6896900558, ]
 
 async def on_startup(_):
     for i in admin:
-        await bot.send_message(chat_id=i, text='Бот включен!',
-                               reply_markup=start_test)
+        await bot.send_message(chat_id=i, text='Бот включен!')
 
 # Запуск бота
 @dp.message_handler(commands=['start'])
 async def start_handler(message: types.Message):
-    await bot.send_message(chat_id=message.from_user.id, text='Hello',
-                           reply_markup=start)
+    await bot.send_message(chat_id=message.from_user.id, text='Hello')
     # await message.answer(text='Привет')
 
 
@@ -63,14 +61,8 @@ async def music_handler(message: types.Message):
 # Обработчик для команды отправки файла
 @dp.message_handler(commands=['send'])
 async def sendfile_handler(message: types.Message):
-    # Укажите путь к файлу, который нужно отправить
-    file_path = os.path.join(os.getcwd(), 'docs', 'dz.docx')
+    await bot.send_document(chat_id=message.from_user.id, document=open('dz.docx', 'rb'))
 
-    if os.path.exists(file_path):
-        file_to_send = InputFile(file_path)
-        await bot.send_document(message.chat.id, file_to_send)
-    else:
-        await message.reply("Файл не найден.")
 
 @dp.message_handler()
 async def handle_message(message: types.Message):
