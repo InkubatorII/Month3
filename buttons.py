@@ -17,7 +17,15 @@ start_test = ReplyKeyboardMarkup(
     row_width=2
     ).add(
 KeyboardButton('/start')
-
+)
+# кнопки для выбора размера товара
+size_product_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+size_product_keyboard.add(
+                  KeyboardButton('S'),
+                  KeyboardButton('M'),
+                  KeyboardButton('L'),
+                  KeyboardButton('XL'),
+                  KeyboardButton('XXL')
 )
 #
 # #3 способ

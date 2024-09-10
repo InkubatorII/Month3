@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
@@ -17,6 +15,7 @@ class FSM_reg(StatesGroup):
 
 
 async def start_fsm_reg(message: types.Message):
+
     await message.answer('Введите Ф.И.О.: ')
     await FSM_reg.fullname.set()
 
