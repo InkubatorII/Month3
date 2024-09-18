@@ -12,6 +12,7 @@ from aiogram.types import ReplyKeyboardRemove
 
 class Fsm_Store(StatesGroup):
     name_products = State()
+    collection = State()
     size = State()
     category = State()
     price = State()
@@ -30,9 +31,15 @@ async def load_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['name_products'] = message.text
 
-    await message.answer('Введите размер товара: ')
+    await message.answer('Какой коллекции?: ')
     await Fsm_Store.next()
 
+async def load_collection(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['collection'] = message.text
+
+    await message.answer('Введите размер товара: ')
+    await Fsm_Store.next()
 
 async def load_size(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -81,6 +88,7 @@ async def load_photo(message: types.Message, state: FSMContext):
     await message.answer_photo(
         photo=data['photo'],
         caption=f'Название/Бренд товара: {data["name_products"]}\n'
+                f'Какой коллекции: {data["collection"]}\n'
                 f'Информация о товаре: {data["info_product"]}\n'
                 f'Размер товара: {data["size"]}\n'
                 f'Категория товара: {data["category"]}\n'
@@ -109,6 +117,10 @@ async def submit(message: types.Message, state: FSMContext):
                 category=data['category'],
                 info_product=data['info_product']
             )
+            await db_main.sql_insert_collection_products(
+                product_id=data['product_id'],
+                collection=data['collection']
+            )
             await state.finish()
 
     elif message.text == 'Нет':
@@ -134,6 +146,7 @@ def register_store(dp: Dispatcher):
 
     dp.register_message_handler(start_fsm, commands=['store2'])
     dp.register_message_handler(load_name, state=Fsm_Store.name_products)
+    dp.register_message_handler(load_collection, state=Fsm_Store.collection)
     dp.register_message_handler(load_size, state=Fsm_Store.size)
     dp.register_message_handler(load_category, state=Fsm_Store.category)
     dp.register_message_handler(load_price, state=Fsm_Store.price)
