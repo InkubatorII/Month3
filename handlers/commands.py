@@ -42,8 +42,10 @@ async def music_handler(message: types.Message):
         await message.answer_audio(music)
 
 
+
 def register_commands(dp: Dispatcher):
     dp.register_message_handler(start_handler, commands=['start'])
     dp.register_message_handler(mem_handler, commands=['mem'])
     dp.register_message_handler(mem_all_handler, commands=['mem_all'])
     dp.register_message_handler(music_handler, commands=['music'])
+

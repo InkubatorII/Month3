@@ -34,7 +34,9 @@ cancel_button = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('О
 
 submit_button = ReplyKeyboardMarkup(resize_keyboard=True,
                                     row_width=2).add(KeyboardButton('Да'), KeyboardButton('Нет'))
-#
+
+
+
 # #3 способ
 # start_test_1 = ReplyKeyboardMarkup(
 #     resize_keyboard=True,

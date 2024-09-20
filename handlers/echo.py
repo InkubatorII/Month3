@@ -33,6 +33,5 @@ async def echo_handler(message: types.Message):
     else:
         await message.answer(text)
 
-
 def register_echo(dp: Dispatcher):
     dp.register_message_handler(echo_handler)
