@@ -19,7 +19,8 @@ FSM_registrtion.register_fsm_reg(dp)
 fsm_store.register_store(dp)
 fsm_store_hw.register_store(dp)
 webapp.register_handlers_webapp(dp)
-admin_group.register_adming_group(dp)
+admin_group.register_admin_group(dp)
+
 
 #echo.register_echo(dp)
 

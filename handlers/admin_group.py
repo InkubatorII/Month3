@@ -44,7 +44,7 @@ async def user_warning(message: types.Message):
                                            text=f'{user_name} был удален за превышение количества предупреждений!')
 
 
-def register_adming_group(dp: Dispatcher):
+def register_admin_group(dp: Dispatcher):
     dp.register_message_handler(welcome_user, content_types=[types.ContentType.NEW_CHAT_MEMBERS])
     dp.register_message_handler(user_warning, commands=['warn'])
     dp.register_message_handler(filter_words)
