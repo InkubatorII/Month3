@@ -29,12 +29,12 @@ async def pin_message(message: types.Message):
         await message.answer("Команда /pin работает только в супергруппах.")
         return
 
-    # Проверяем, что команда отправлена в ответ на другое сообщение
+
     if not message.reply_to_message:
         await message.answer("Эту команду нужно использовать в ответ на сообщение, которое хотите закрепить.")
         return
 
-    # Пытаемся закрепить сообщение
+
     try:
         await bot.pin_chat_message(chat_id=message.chat.id, message_id=message.reply_to_message.message_id)
         await message.answer("Сообщение закреплено!")
