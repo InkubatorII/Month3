@@ -1,4 +1,8 @@
+from collections import defaultdict
+
 from aiogram import types, Dispatcher
+from pyexpat.errors import messages
+
 from config import bot, admin
 
 
@@ -43,8 +47,24 @@ async def user_warning(message: types.Message):
                     await bot.send_message(chat_id=message.chat.id,
                                            text=f'{user_name} был удален за превышение количества предупреждений!')
 
+async def pin_message(message: types.Message):
+    if message.chat.type != 'private':
+        if not message.reply_to_message:
+            await message.answer('Команда должна быть ответом на сообщение!')
+        else:
+            message_to_pin = message.reply_to_message
+
+            if message_to_pin:
+                await bot.pin_chat_message(
+                    chat_id=message.chat.id,
+                    message_id=message_to_pin.message_id
+
+                )
+    else:
+        await message.answer('Эта команда должна использоваться админом!')
 
 def register_admin_group(dp: Dispatcher):
     dp.register_message_handler(welcome_user, content_types=[types.ContentType.NEW_CHAT_MEMBERS])
     dp.register_message_handler(user_warning, commands=['warn'])
+    dp.register_message_handler(pin_message, text='!pin')
     dp.register_message_handler(filter_words)
