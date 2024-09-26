@@ -112,7 +112,7 @@ async def submit(message: types.Message, state: FSMContext):
                 product_id=data['product_id'],
                 photo=data['photo']
             )
-            await db_main.sql_insert_product_detail(
+            await db_main.sql_insert_products_details(
                 product_id=data['product_id'],
                 category=data['category'],
                 info_product=data['info_product']

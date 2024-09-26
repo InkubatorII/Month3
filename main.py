@@ -15,6 +15,8 @@ async def on_startup(_):
 
 
 commands.register_commands(dp)
+send_products.register_send_products_handler(dp)
+send_delete_product.register_send_delete_product(dp)
 quiz.register_quiz(dp)
 FSM_registrtion.register_fsm_reg(dp)
 fsm_store.register_store(dp)
@@ -22,8 +24,7 @@ fsm_store_hw.register_store(dp)
 webapp.register_handlers_webapp(dp)
 admin_group.register_admin_group(dp)
 
-send_products.register_send_products_handler(dp)
-send_delete_product.register_send_delete_product(dp)
+
 
 
 #echo.register_echo(dp)
