@@ -3,7 +3,7 @@ from collections import defaultdict
 from aiogram import types, Dispatcher
 from pyexpat.errors import messages
 
-from config import bot, admin
+from config import bot, admins
 
 
 async def welcome_user(message: types.Message):
